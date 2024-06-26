@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Shoe Store</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .nav-pills .nav-link {
+            border-radius: 5rem;
+        }
+        .nav-fill .nav-item {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            color: var(--bs-primary);
+            background-color: var(--bs-white);
+        }
+        .nav-pills .nav-link {
+            color: var(--bs-white);
+            background-color: var(--bs-primary);
+        }
+        .product-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .product-detail img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .product-detail .product-info {
+            text-align: center;
+        }
+        .product-detail .product-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .product-detail .product-price {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .product-detail .product-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">ShoeStore</a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="index.html" aria-selected="false">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="aboutus.html" aria-selected="false">About Us</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="analytics.html" aria-selected="false">Analytics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="cart.html" aria-selected="false">Cart</a>
+                    </li>
+                   
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="account.html" aria-selected="false">Account</a>
+                    </li>
+                    
+                    <li class="nav-item d-none" role="presentation" id="userNavItem">
+                        <span id="user-greeting" class="navbar-text"></span>
+                        <a id="logout-link" class="nav-link rounded-5" href="#" onclick="logoutUser()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <div id="product-details" class="row product-detail">
+            <!-- Product details will be dynamically inserted here -->
+        </div>
+    </main>
+    <footer class="text-center bg-dark text-white py-3 footer">
+        <p>Copyright &copy; 2023 Shoe Store</p>
+    </footer>
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            const products = {
+                'nike-air-max': {
+                    name: 'Nike Air Max',
+                    imageUrl: 'img/nike.jpeg',
+                    description: 'High quality Nike Air Max shoes for maximum comfort and style.',
+                    price: 120.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'adidas-ultraboost': {
+                    name: 'Adidas UltraBoost',
+                    imageUrl: 'img/addidas.jpg',
+                    description: 'Experience the ultimate comfort with Adidas UltraBoost shoes.',
+                    price: 180.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'puma-running-shoes': {
+                    name: 'Puma Running Shoes',
+                    imageUrl: 'img/puma.webp',
+                    description: 'Stay ahead of the competition with Puma Running Shoes.',
+                    price: 100.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'reebok-classic': {
+                    name: 'Reebok Classic',
+                    imageUrl: 'img/reebok.jpeg',
+                    description: 'Classic Reebok shoes for timeless style and comfort.',
+                    price: 90.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                }
+            };
+
+            const product = products[productId];
+
+            if (product) {
+                const productDetailsContainer = document.getElementById('product-details');
+                productDetailsContainer.innerHTML = `
+                    <div class="col-md-6">
+                        <img src="${product.imageUrl}" class="img-fluid" alt="${product.name}">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <p>Price: $${product.price.toFixed(2)}</p>
+                        <div class="mb-3">
+                            <label for="sizeSelect" class="form-label">Select Size:</label>
+                            <select id="sizeSelect" class="form-select">
+                                ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                            </select>
+                        </div>
+                        <p>Status: ${product.inStock ? 'In Stock' : 'Out of Stock'}</p>
+                        <button class="btn btn-primary" onclick="addToCart('${productId}')">Add to Cart</button>
+                    </div>
+                `;
+            } else {
+                const productDetailsContainer = document.getElementById('product-details');
+                productDetailsContainer.innerHTML = `
+                    <div class="col-12">
+                        <p class="text-danger">Product not found.</p>
+                    </div>
+                `;
+            }
+        });
+
+        function addToCart(productId) {
+            const sizeSelect = document.getElementById('sizeSelect');
+            const selectedSize = sizeSelect ? sizeSelect.value : null;
+
+            if (!selectedSize) {
+                alert('Please select a size.');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const products = {
+                'nike-air-max': {
+                    name: 'Nike Air Max',
+                    imageUrl: 'img/nike.jpeg',
+                    description: 'High quality Nike Air Max shoes for maximum comfort and style.',
+                    price: 120.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'adidas-ultraboost': {
+                    name: 'Adidas UltraBoost',
+                    imageUrl: 'img/addidas.jpg',
+                    description: 'Experience the ultimate comfort with Adidas UltraBoost shoes.',
+                    price: 180.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'puma-running-shoes': {
+                    name: 'Puma Running Shoes',
+                    imageUrl: 'img/puma.webp',
+                    description: 'Stay ahead of the competition with Puma Running Shoes.',
+                    price: 100.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                },
+                'reebok-classic': {
+                    name: 'Reebok Classic',
+                    imageUrl: 'img/reebok.jpeg',
+                    description: 'Classic Reebok shoes for timeless style and comfort.',
+                    price: 90.00,
+                    sizes: ['8', '9', '10', '11'],
+                    inStock: true
+                }
+            };
+
+            const product = products[productId];
+            const cartItem = cart.find(item => item.id === productId && item.size === selectedSize);
+
+            if (product) {
+                if (cartItem) {
+                    cartItem.quantity += 1;
+                } else {
+                    cart.push({ ...product, id: productId, size: selectedSize, quantity: 1 });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${product.name} (Size: ${selectedSize}) has been added to your cart.`);
+            } else {
+                alert('Product not found.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoe Store - Home</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .card {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .product-container .card {
+            flex: 1 1 calc(33.333% - 20px);
+            margin: 10px;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .nav-pills .nav-link {
+            border-radius: 5rem;
+        }
+        .nav-fill .nav-item {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            color: var(--bs-primary);
+            background-color: var(--bs-white);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--bs-white);
+            background-color: var(--bs-primary);
+        }
+        .view-details, .card-body a.btn {
+            display: none !important;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">ShoeStore</a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active rounded-5" href="index.html" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="aboutus.html" aria-selected="false">About Us</a>
+                    </li>
+                   
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="analytics.html" aria-selected="false">Analytics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="cart.html" aria-selected="false">Cart</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="account.html" aria-selected="false">Account</a>
+                    </li>                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <h1 class="text-center mb-4">Welcome to Our Shoe Store</h1>
+        <p class="text-center">Explore our wide range of high-quality shoes.</p>
+        <div id="product-container" class="row product-container">
+            <div class="card">
+                <a href="nike.html"><img src="img/nike.jpeg" alt="Nike Air Max"></a>
+                <div class="card-body">
+                    <h5 class="card-title">Nike Air Max</h5>
+                    <p class="card-text">$120.00</p>
+                </div>
+            </div>
+            <div class="card">
+                <a href="addidas.html"><img src="img/addidas.jpg" alt="Adidas UltraBoost"></a>
+                <div class="card-body">
+                    <h5 class="card-title">Adidas UltraBoost</h5>
+                    <p class="card-text">$180.00</p>
+                </div>
+            </div>
+            <div class="card">
+                <a href="puma.html"><img src="img/puma.webp" alt="Puma Running Shoes"></a>
+                <div class="card-body">
+                    <h5 class="card-title">Puma Running Shoes</h5>
+                    <p class="card-text">$100.00</p>
+                </div>
+            </div>
+            <div class="card">
+                <a href="reebok.html"><img src="img/reebok.jpeg" alt="Reebok Classic"></a>
+                <div class="card-body">
+                    <h5 class="card-title">Reebok Classic</h5>
+                    <p class="card-text">$90.00</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center bg-dark text-white py-3 footer">
+        <p>Copyright &copy; 2023 Shoe Store</p>
+    </footer>
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const loginNavItem = document.getElementById('loginNavItem');
+
+            if (loggedInUser) {
+                loginNavItem.style.display = 'none';
+            } else {
+                loginNavItem.style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>

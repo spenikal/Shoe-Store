@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Shoe Store</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .developer-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers content horizontally */
+            justify-content: center; /* Centers content vertically */
+            margin: 20px;
+            padding: 20px;
+        }
+        .developer-image {
+            width: 300px; /* Set the width as desired */
+            height: auto; /* Keep height auto for maintaining aspect ratio */
+            margin-bottom: 20px; /* Adds space below the image */
+            margin-top: -90px; /* Reduces space on top of the image */
+        }
+        .nav-link.active {
+            color: var(--bs-primary) !important;
+            background-color: var(--bs-white) !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">ShoeStore</a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="index.html" aria-selected="false">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5 active" href="aboutus.html" aria-selected="true">About Us</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="analytics.html" aria-selected="false">Analytics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="cart.html" aria-selected="false">Cart</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="account.html" aria-selected="false">Account</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4 developer-info">
+        <img src="img/my pic.jpg" alt="Developer Image" class="developer-image">
+        <h1>About the Developer</h1>
+        <p>I am Sai Chowdary Penikalapati, a passionate ServiceNow developer with 2.5 years of experience and currently pursuing a master's degree in Business Analytics and Information Systems at the University of South Florida. This website showcases my ability to build responsive and interactive web applications using HTML, CSS, JavaScript, Bootstrap. Visit my GitHub to explore more projects: <a href="https://github.com/yourgithubusername">GitHub Profile</a>.</p>
+    </main>
+    <footer class="text-center bg-dark text-white py-3 footer">
+        <p>Copyright &copy; 2023 Shoe Store</p>
+    </footer>
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const userNavItem = document.getElementById('userNavItem');
+            const loginNavItem = document.getElementById('loginNavItem');
+            const registerNavItem = document.getElementById('registerNavItem');
+
+            if (loggedInUser) {
+                loginNavItem.style.display = 'none';
+                userNavItem.classList.remove('d-none');
+                userNavItem.style.display = 'flex';
+            } else {
+                loginNavItem.style.display = 'flex';
+                registerNavItem.style.display = 'flex';
+                userNavItem.style.display = 'none';
+            }
+        });
+
+        function logoutUser() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

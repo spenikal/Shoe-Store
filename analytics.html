@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Shoe Store</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .nav-pills .nav-link {
+            border-radius: 5rem;
+        }
+        .nav-fill .nav-item {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            color: var(--bs-primary);
+            background-color: var(--bs-white);
+        }
+        .nav-pills .nav-link {
+            color: var(--bs-white);
+            background-color: var(--bs-primary);
+        }
+        .chart-container {
+            margin-bottom: 40px;
+        }
+        .description {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .section-gap {
+            margin-top: 40px;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">ShoeStore</a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="index.html" aria-selected="false">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="aboutus.html" aria-selected="false">About Us</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active rounded-5" href="analytics.html" aria-selected="true">Analytics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="cart.html" aria-selected="false">Cart</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="account.html" aria-selected="false">Account</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <h1 class="text-center mb-4">Sales Analytics</h1>
+        <div class="row section-gap">
+            <div class="col-md-6 chart-container">
+                <h3 class="text-center">Monthly Sales</h3>
+                <canvas id="monthlySalesChart"></canvas>
+                <p class="description">This chart shows the monthly sales data for the current year, highlighting trends and sales peaks.</p>
+            </div>
+            <div class="col-md-6 chart-container">
+                <h3 class="text-center">Product Distribution</h3>
+                <canvas id="productDistributionChart"></canvas>
+                <p class="description">This chart illustrates the distribution of sales among different product categories, providing insight into the most popular products.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p>Copyright &copy; 2023 Shoe Store</p>
+    </footer>
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="js/analytics.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const userNavItem = document.getElementById('userNavItem');
+            const loginNavItem = document.getElementById('loginNavItem');
+            const registerNavItem = document.getElementById('registerNavItem');
+
+            if (loggedInUser) {
+                loginNavItem.style.display = 'none';
+                registerNavItem.style.display = 'none';
+                userNavItem.classList.remove('d-none');
+                userNavItem.style.display = 'flex';
+            } else {
+                loginNavItem.style.display = 'flex';
+                registerNavItem.style.display = 'flex';
+                userNavItem.style.display = 'none';
+            }
+        });
+
+        function logoutUser() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

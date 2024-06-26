@@ -1,0 +1,225 @@
+:root {
+  --primary-color: #333;
+  --secondary-color: #94acaa; /* Olive green background color */
+  --accent-color: #ff4500;
+  --light-accent: #ffe5e0;
+  --font-family-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-main);
+  line-height: 1.6;
+  color: var(--primary-color);
+  background-color: var(--secondary-color); /* Use olive green background color */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+  text-decoration: none; /* Remove underline */
+  color: white; /* Ensure color is white */
+}
+
+.nav-pills {
+  display: flex;
+  gap: 20px;
+  list-style: none; /* Ensure no list marker are shown */
+  padding-left: 0; /* Remove padding which is sometimes added by browsers */
+  white-space: nowrap;
+}
+
+.nav-pills .nav-item {
+  list-style: none;
+  position: relative; /* Ensure it's positioned for pseudo-elements */
+}
+
+.nav-pills .nav-item::before,
+.nav-pills .nav-item::after {
+  content: none; /* Hide pseudo-elements */
+}
+
+.nav-pills .nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link.active {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.product-container .card {
+  width: 300px;
+  height: 400px;
+  background: var(--light-accent);
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-container .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0.9;
+}
+
+.product-container .card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-container .card:hover img {
+  transform: scale(1.1);
+}
+
+.product-container .card-body {
+  padding: 10px 15px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8); /* semi-transparent background */
+}
+
+.product-container .card-body .btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  z-index: 1;
+}
+
+.product-container .card:hover .btn {
+  display: block;
+  opacity: 1;
+}
+
+.product-container .card-body .btn:hover {
+  background-color: darken(var(--accent-color), 10%);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 10px;
+  background: var(--primary-color);
+  color: white;
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .product-container .card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container .card {
+    flex: 1 1 calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+
+  .nav-pills {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-pills .nav-item {
+    margin-bottom: 10px;
+  }
+}
+
+/* View Details Button */
+.view-details {
+  display: none;
+}
+
+.chart-container {
+  margin-bottom: 40px;
+}
+
+.description {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.section-gap {
+  margin-top: 40px;
+}
+
+/* Center Text */
+.text-center {
+  text-align: center;
+}

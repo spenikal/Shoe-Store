@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Shoe Store</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .nav-pills .nav-link {
+            border-radius: 5rem;
+        }
+        .nav-fill .nav-item {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            color: var(--bs-primary);
+            background-color: var(--bs-white);
+        }
+        .nav-pills .nav-link {
+            color: var(--bs-white);
+            background-color: var(--bs-primary);
+        }
+        .cart-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .cart-box h4 {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .cart-box .item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .cart-box .item-actions input[type="number"] {
+            width: 60px;
+            text-align: center;
+            margin: 0 10px;
+        }
+        .cart-box .item-actions button {
+            padding: 5px 10px;
+        }
+        .total-price {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .cart-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .cart-buttons button {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        .item-image {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-actions button {
+            margin: 0 5px;
+        }
+        .btn-primary, .btn-danger {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">ShoeStore</a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="index.html" aria-selected="false">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="aboutus.html" aria-selected="false">About Us</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="analytics.html" aria-selected="false">Analytics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active rounded-5" href="cart.html" aria-selected="true">Cart</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rounded-5" href="account.html" aria-selected="false">Account</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <h1 class="text-center">Your Cart</h1>
+        <div id="cartItems" class="list-group">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="total-price">
+            Total: <span id="totalPrice">$0.00</span>
+        </div>
+        <div class="text-center">
+            <button id="checkoutButton" onclick="proceedToCheckout()" class="btn btn-primary mt-3">Proceed to Checkout</button>
+        </div>
+        <p id="emptyMessage" class="text-danger text-center" style="display: none;">Your cart is empty.</p>
+        <div id="logoutContainer" class="text-center mt-3" style="display: none;">
+            <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
+        </div>
+    </main>
+    <footer class="text-center bg-dark text-white py-3 footer">
+        <p>Copyright &copy; 2023 Shoe Store</p>
+    </footer>
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            const userNavItem = document.getElementById('userNavItem');
+            const loginNavItem = document.getElementById('loginNavItem');
+            const registerNavItem = document.getElementById('registerNavItem');
+            const logoutContainer = document.getElementById('logoutContainer');
+
+            if (loggedInUser) {
+                loginNavItem.style.display = 'none';
+                registerNavItem.style.display = 'none';
+                logoutContainer.style.display = 'block';
+            } else {
+                loginNavItem.style.display = 'flex';
+                registerNavItem.style.display = 'flex';
+                logoutContainer.style.display = 'none';
+            }
+        });
+
+        function logoutUser() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
